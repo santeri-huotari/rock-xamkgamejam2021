@@ -63,12 +63,19 @@ public class PlayerController : MonoBehaviour
         heldWeapon.Fire();
     }
 
+    void PickUpWeapon(Weapon weapon)
+    {
+        heldWeapon = weapon;
+        weapon.gameObject.transform.SetParent(gameObject.transform);
+        weapon.gameObject.transform.SetPositionAndRotation(new Vector3(transform.position.x + 0.95f, transform.position.y + 0.3f, transform.position.z), transform.rotation);
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Weapon")
         {
-            heldWeapon = collision.gameObject.GetComponent<Weapon>();
             Destroy(collision.gameObject.GetComponent<Collider>());
+            PickUpWeapon(collision.gameObject.GetComponent<Weapon>());
         }
     }
 }

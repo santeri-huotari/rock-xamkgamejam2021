@@ -1078,10 +1078,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gun
       objectReference: {fileID: 0}
-    - target: {fileID: 2400650236356966460, guid: 813d9a12e341b42b082bff050c453e07, type: 3}
-      propertyPath: m_TagString
-      value: Weapon
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 813d9a12e341b42b082bff050c453e07, type: 3}
 --- !u!1001 &4372846054331878973
@@ -1094,6 +1090,18 @@ PrefabInstance:
     - target: {fileID: 1390091036890222132, guid: 1ef1061af359f091ea5c9ef1502d72b7, type: 3}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390091036890222132, guid: 1ef1061af359f091ea5c9ef1502d72b7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390091036890222132, guid: 1ef1061af359f091ea5c9ef1502d72b7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390091036890222132, guid: 1ef1061af359f091ea5c9ef1502d72b7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1390091036890222132, guid: 1ef1061af359f091ea5c9ef1502d72b7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1122,6 +1130,10 @@ PrefabInstance:
     - target: {fileID: 1390091036890222132, guid: 1ef1061af359f091ea5c9ef1502d72b7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5008110308675511795, guid: 1ef1061af359f091ea5c9ef1502d72b7, type: 3}
+      propertyPath: m_Height
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 7964402421147637269, guid: 1ef1061af359f091ea5c9ef1502d72b7, type: 3}
       propertyPath: m_Name

@@ -16,25 +16,37 @@ public class Weapon : MonoBehaviour
     private int ammo;
     [SerializeField]
     private int bulletSpeed;
+    private bool canShoot = true;
+    float cooldown;
 
     // Start is called before the first frame update
     void Start()
     {
         ammo = maxAmmo;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        cooldown = fireRate;
     }
 
     public void Fire()
     {
-        if (ammo > 0)
+        if (ammo > 0 && canShoot)
         {
-            var spawnedBullet = Instantiate(bulletPrefab, gameObject.GetComponentInChildren<BulletSpawnPoint>().transform.position, Quaternion.identity);
+            var spawnedBullet = Instantiate(bulletPrefab, gameObject.GetComponentInChildren<BulletSpawnPoint>().transform.position, transform.rotation);
             spawnedBullet.GetComponent<Rigidbody>().AddForce(transform.forward * bulletSpeed, ForceMode.Impulse);
+
+            ammo--;
+            canShoot = false;
+            InvokeRepeating("FireRateCountdown", 0f, 1f);
+        }
+    }
+
+    void FireRateCountdown()
+    {
+        cooldown -= 1;
+        if (cooldown == 0)
+        {
+            canShoot = true;
+            cooldown = fireRate;
+            CancelInvoke();
         }
     }
 }
