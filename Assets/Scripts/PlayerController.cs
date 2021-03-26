@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float mouseSensitivity;
 
+    private Weapon heldWeapon;
+
     float xRotation = 0;
 
     // Start is called before the first frame update
@@ -25,6 +27,11 @@ public class PlayerController : MonoBehaviour
     {
         Movement();
         Rotation();
+
+        if (Input.GetButtonDown("Fire1") && heldWeapon != null)
+        {
+            FireWeapon();
+        }
     }
 
     void Movement()
@@ -49,5 +56,19 @@ public class PlayerController : MonoBehaviour
 
         Camera.main.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
+    }
+
+    void FireWeapon()
+    {
+        heldWeapon.Fire();
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Weapon")
+        {
+            heldWeapon = collision.gameObject.GetComponent<Weapon>();
+            Destroy(collision.gameObject.GetComponent<Collider>());
+        }
     }
 }
