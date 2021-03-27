@@ -110,8 +110,8 @@ public class PlayerController : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Ammo")
         {
+            heldWeapon.ammo++;
             Destroy(collision.gameObject);
-
         }
     }
 }

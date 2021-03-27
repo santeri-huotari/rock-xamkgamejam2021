@@ -13,7 +13,7 @@ public class Weapon : MonoBehaviour
 
     [SerializeField]
     private int maxAmmo;
-    private int ammo;
+    public int ammo;
     [SerializeField]
     private int bulletSpeed;
     private bool canShoot = true;

@@ -9,7 +9,7 @@ public class Chomps : MonoBehaviour
     private NavMeshAgent navAgent;
     private NavMeshHit navhit;
     private Vector3 randomLocation;
-    
+
     public GameObject Ammo;
     public int Health;
     public int PowerLevel;
@@ -69,7 +69,7 @@ public class Chomps : MonoBehaviour
     }
     void SpawnItems()
     {
-        while(AmmoSpawnCount > 0)
+        while (AmmoSpawnCount > 0)
         {
             randomLocation = new Vector3(Random.Range(-100, 100), 0, Random.Range(-100, 100));
             if (NavMesh.SamplePosition(randomLocation, out navhit, 0.5f, 1) == true)
@@ -83,5 +83,13 @@ public class Chomps : MonoBehaviour
     {
         Destroy(gameObject);
         //teleport
+    }
+
+    void OnTriggerEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Projectile")
+        {
+            Health--;
+        }
     }
 }
