@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     private CharacterController characterController;
+    private GameObject gameOverPanel;
+    private Button tryAgainButton;
+    private Button mainMenuButton;
 
     [SerializeField]
     private float speed;
@@ -15,26 +20,40 @@ public class PlayerController : MonoBehaviour
 
     float xRotation = 0;
 
+    private bool alive = true;
+
     // Start is called before the first frame update
     void Start()
     {
         characterController = gameObject.GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
+
+        tryAgainButton = GameObject.Find("TryAgainButton").GetComponent<Button>();
+        mainMenuButton = GameObject.Find("MainMenuButton").GetComponent<Button>();
+
+        tryAgainButton.onClick.AddListener(ReloadScene);
+        mainMenuButton.onClick.AddListener(GoToMenu);
+
+        gameOverPanel = GameObject.Find("GameOverPanel");
+        gameOverPanel.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Movement();
-        Rotation();
-        if (heldWeapon != null)
+        if (alive)
         {
-            AimWeapon();
-        }
+            Movement();
+            Rotation();
+            if (heldWeapon != null)
+            {
+                AimWeapon();
+            }
 
-        if (Input.GetButtonDown("Fire1") && heldWeapon != null)
-        {
-            FireWeapon();
+            if (Input.GetButtonDown("Fire1") && heldWeapon != null)
+            {
+                FireWeapon();
+            }
         }
     }
 
@@ -101,6 +120,23 @@ public class PlayerController : MonoBehaviour
         */
     }
 
+    void Die()
+    {
+        alive = false;
+        Cursor.lockState = CursorLockMode.None;
+        gameOverPanel.SetActive(true);
+    }
+
+    void GoToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Weapon")
@@ -115,7 +151,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collider.gameObject.tag == "Chomps")
         {
-            gameObject.SetActive(false);
+            Die();
         }
         else if (collider.gameObject.tag == "Ammo")
         {
