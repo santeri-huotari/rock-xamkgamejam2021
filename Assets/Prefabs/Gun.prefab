@@ -157,7 +157,7 @@ MonoBehaviour:
   fireRate: 5
   shotAmount: 1
   bulletPrefab: {fileID: 7544722910472713826, guid: c2a9f1b4b39e1df958b6bcfbd5557332, type: 3}
-  maxAmmo: 5
+  startingAmmo: 5
   ammo: 0
   bulletSpeed: 50
 --- !u!54 &670637110

@@ -12,7 +12,7 @@ public class Weapon : MonoBehaviour
     private GameObject bulletPrefab;
 
     [SerializeField]
-    private int maxAmmo;
+    private int startingAmmo;
     public int ammo;
     [SerializeField]
     private int bulletSpeed;
@@ -22,7 +22,7 @@ public class Weapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ammo = maxAmmo;
+        ammo = startingAmmo;
         cooldown = fireRate;
     }
 
