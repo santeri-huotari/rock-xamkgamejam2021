@@ -25,7 +25,7 @@ public class Chomps : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         navAgent = gameObject.GetComponent<NavMeshAgent>();
 
-        Health = 10;
+        Health = 3;
         PowerLevel = 1;
         Phase = 1;
 
@@ -71,13 +71,11 @@ public class Chomps : MonoBehaviour
     {
         while (AmmoSpawnCount > 0)
         {
-            Debug.Log("while");
             randomLocation = new Vector3(Random.Range(-100, 100), 0, Random.Range(-100, 100));
             if (NavMesh.SamplePosition(randomLocation, out navhit, 0.5f, 1) == true)
             {
                 Instantiate(Ammo, randomLocation, transform.rotation);
                 AmmoSpawnCount--;
-                Debug.Log("spawn");
             }
         }
     }
