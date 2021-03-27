@@ -78,23 +78,27 @@ public class PlayerController : MonoBehaviour
     {
         heldWeapon = weapon;
         weapon.gameObject.transform.SetParent(gameObject.transform);
-        weapon.gameObject.transform.SetPositionAndRotation(new Vector3(transform.position.x + 0.95f, transform.position.y + 0.3f, transform.position.z), transform.rotation);
+        weapon.gameObject.transform.rotation = transform.rotation;
+        weapon.gameObject.transform.position = transform.position;
+        weapon.gameObject.transform.Translate(transform.forward * 0.5f, Space.Self);
+        weapon.gameObject.transform.Translate(transform.up * 0.5f, Space.Self);
     }
 
     void AimWeapon()
     {
-        // THIS CODE WAS KINDA SCUFFED. WAS SUPPOSED TO "AIM" You can uncomment. If you dare >:)
-        //RaycastHit raycastHit = new RaycastHit();
-        //Physics.Raycast(transform.position, transform.forward, out raycastHit, 100f);
+        /* THIS CODE WAS KINDA SCUFFED. WAS SUPPOSED TO "AIM" You can uncomment. If you dare >:)
+        RaycastHit raycastHit = new RaycastHit();
+        Physics.Raycast(transform.position, transform.forward, out raycastHit, 100f);
 
-        //if (raycastHit.point != Vector3.zero)
-        //{
-        //    heldWeapon.gameObject.transform.LookAt(raycastHit.point, Vector3.up);
-        //}
-        //else
-        //{
-        //    heldWeapon.gameObject.transform.rotation = transform.rotation;
-        //}
+        if (raycastHit.point != Vector3.zero)
+        {
+            heldWeapon.gameObject.transform.LookAt(raycastHit.point, Vector3.up);
+        }
+        else
+        {
+            heldWeapon.gameObject.transform.rotation = transform.rotation;
+        }
+        */
     }
 
     void OnCollisionEnter(Collision collision)
@@ -104,7 +108,7 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject.GetComponent<Collider>());
             PickUpWeapon(collision.gameObject.GetComponent<Weapon>());
         }
-        else if(collision.gameObject.tag == "ammo")
+        else if (collision.gameObject.tag == "Ammo")
         {
             Destroy(collision.gameObject);
 
