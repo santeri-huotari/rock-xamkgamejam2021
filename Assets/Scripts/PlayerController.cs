@@ -80,8 +80,8 @@ public class PlayerController : MonoBehaviour
         weapon.gameObject.transform.SetParent(gameObject.transform);
         weapon.gameObject.transform.rotation = transform.rotation;
         weapon.gameObject.transform.position = transform.position;
-        weapon.gameObject.transform.Translate(transform.forward * 0.5f, Space.Self);
-        weapon.gameObject.transform.Translate(transform.up * 0.5f, Space.Self);
+        weapon.gameObject.transform.Translate(Vector3.right * 0.6f);
+        weapon.gameObject.transform.Translate(Vector3.up * 0.5f);
     }
 
     void AimWeapon()
@@ -108,10 +108,19 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject.GetComponent<Collider>());
             PickUpWeapon(collision.gameObject.GetComponent<Weapon>());
         }
-        else if (collision.gameObject.tag == "Ammo")
+
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.tag == "Chomps")
         {
-            heldWeapon.ammo++;
-            Destroy(collision.gameObject);
+            gameObject.SetActive(false);
+        }
+        else if (collider.gameObject.tag == "Ammo")
+        {
+            heldWeapon.ammo += 4;
+            Destroy(collider.gameObject);
         }
     }
 }
