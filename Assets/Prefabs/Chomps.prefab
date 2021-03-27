@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 4105775905537776169}
   m_Layer: 0
   m_Name: Chomps
-  m_TagString: Untagged
+  m_TagString: Chomps
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,6 +131,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba5a6919e5a7d7d4db74f6904fd50da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Ammo: {fileID: 0}
+  Health: 0
+  PowerLevel: 0
+  Stunned: 0
+  AmmoSpawnCount: 0
+  Phase: 0
+  PowerGrowthRate: 1
+  PowerLevelThreshold: 60
+  Speed: 1
 --- !u!54 &8780637409442145638
 Rigidbody:
   m_ObjectHideFlags: 0

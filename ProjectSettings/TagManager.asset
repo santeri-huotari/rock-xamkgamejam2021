@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Weapon
+  - Projectile
+  - Chomps
+  - Ammo
   layers:
   - Default
   - TransparentFX

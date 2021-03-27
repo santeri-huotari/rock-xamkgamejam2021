@@ -104,5 +104,10 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject.GetComponent<Collider>());
             PickUpWeapon(collision.gameObject.GetComponent<Weapon>());
         }
+        else if(collision.gameObject.tag == "ammo")
+        {
+            Destroy(collision.gameObject);
+
+        }
     }
 }

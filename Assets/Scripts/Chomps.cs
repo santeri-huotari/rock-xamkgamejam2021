@@ -7,9 +7,19 @@ public class Chomps : MonoBehaviour
 {
     private GameObject player;
     private NavMeshAgent navAgent;
+    private NavMeshHit navhit;
+    private Vector3 randomLocation;
+    
+    public GameObject Ammo;
     public int Health;
     public int PowerLevel;
-    public bool stunned;
+    public bool Stunned;
+    public int AmmoSpawnCount;
+    public int Phase;
+
+    public int PowerGrowthRate;
+    public int PowerLevelThreshold;
+    public float Speed;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -17,38 +27,57 @@ public class Chomps : MonoBehaviour
 
         Health = 10;
         PowerLevel = 1;
+        Phase = 1;
 
+        SpawnItems();
         InvokeRepeating("Tick", 0, 0.5f);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Projectile")
+        {
+            Health--;
+        }
     }
     //called every 0.5 seconds
     void Tick()
     {
         navAgent.SetDestination(player.transform.position);
-        PowerLevel++;
-        if (PowerLevel >= 300)
+        PowerLevel += PowerGrowthRate;
+        if (PowerLevel >= PowerLevelThreshold)
         {
-            navAgent.speed = 6.5f;
-        }
-        else if (PowerLevel >= 180)
-        {
-            navAgent.speed = 5.5f;
-        }
-        else if (PowerLevel >= 60)
-        {
-            navAgent.speed = 4.5f;
+            navAgent.speed += Speed;
+            PowerLevelThreshold *= 2;
         }
         if (Health <= 0)
         {
             Die();
         }
     }
-    void Stunned()
+    void Stun()
     {
         navAgent.isStopped = true;
+        Invoke("Resume", 5f);
     }
     void Resume()
     {
         navAgent.isStopped = false;
+    }
+    void NextPhase()
+    {
+        //increase power growth rate 
+    }
+    void SpawnItems()
+    {
+        while(AmmoSpawnCount > 0)
+        {
+            randomLocation = new Vector3(Random.Range(0, 10), 0, Random.Range(0, 10));
+            if (NavMesh.SamplePosition(randomLocation, out navhit, 0.1f, 1) == true)
+            {
+                Instantiate(Ammo, randomLocation, transform.rotation);
+                AmmoSpawnCount--;
+            }
+        }
     }
     void Die()
     {
