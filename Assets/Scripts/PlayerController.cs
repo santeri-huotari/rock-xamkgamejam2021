@@ -27,6 +27,10 @@ public class PlayerController : MonoBehaviour
     {
         Movement();
         Rotation();
+        if (heldWeapon != null)
+        {
+            AimWeapon();
+        }
 
         if (Input.GetButtonDown("Fire1") && heldWeapon != null)
         {
@@ -55,6 +59,13 @@ public class PlayerController : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         Camera.main.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+
+        if (heldWeapon != null)
+        {
+            // Weapon rotation. #FornowTotallyNotGonnaLeaveItHere.
+            heldWeapon.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        }
+
         transform.Rotate(Vector3.up * mouseX);
     }
 
@@ -68,6 +79,22 @@ public class PlayerController : MonoBehaviour
         heldWeapon = weapon;
         weapon.gameObject.transform.SetParent(gameObject.transform);
         weapon.gameObject.transform.SetPositionAndRotation(new Vector3(transform.position.x + 0.95f, transform.position.y + 0.3f, transform.position.z), transform.rotation);
+    }
+
+    void AimWeapon()
+    {
+        // THIS CODE WAS KINDA SCUFFED. WAS SUPPOSED TO "AIM" You can uncomment. If you dare >:)
+        //RaycastHit raycastHit = new RaycastHit();
+        //Physics.Raycast(transform.position, transform.forward, out raycastHit, 100f);
+
+        //if (raycastHit.point != Vector3.zero)
+        //{
+        //    heldWeapon.gameObject.transform.LookAt(raycastHit.point, Vector3.up);
+        //}
+        //else
+        //{
+        //    heldWeapon.gameObject.transform.rotation = transform.rotation;
+        //}
     }
 
     void OnCollisionEnter(Collision collision)
