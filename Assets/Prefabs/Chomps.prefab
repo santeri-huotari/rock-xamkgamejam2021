@@ -131,11 +131,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba5a6919e5a7d7d4db74f6904fd50da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ammo: {fileID: 0}
+  Ammo: {fileID: 3246764019278098420, guid: f8d344a5cac279847b7bad6f2d031972, type: 3}
   Health: 0
   PowerLevel: 0
   Stunned: 0
-  AmmoSpawnCount: 0
+  AmmoSpawnCount: 5
   Phase: 0
   PowerGrowthRate: 1
   PowerLevelThreshold: 60
