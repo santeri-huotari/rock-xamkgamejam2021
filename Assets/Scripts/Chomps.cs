@@ -71,7 +71,7 @@ public class Chomps : MonoBehaviour
     {
         while(AmmoSpawnCount > 0)
         {
-            randomLocation = new Vector3(Random.Range(0, 10), 0, Random.Range(0, 10));
+            randomLocation = new Vector3(Random.Range(-100, 100), 0, Random.Range(-100, 100));
             if (NavMesh.SamplePosition(randomLocation, out navhit, 0.1f, 1) == true)
             {
                 Instantiate(Ammo, randomLocation, transform.rotation);
