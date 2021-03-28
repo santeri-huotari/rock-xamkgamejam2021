@@ -10,7 +10,9 @@ public class PlayerController : MonoBehaviour
     private GameObject gameOverPanel;
     private Button tryAgainButton;
     private Button mainMenuButton;
-    
+    private AudioSource audioSource;
+
+
 
     [SerializeField]
     private float speed;
@@ -35,6 +37,8 @@ public class PlayerController : MonoBehaviour
 
         tryAgainButton.onClick.AddListener(ReloadScene);
         mainMenuButton.onClick.AddListener(GoToMenu);
+
+        audioSource = GetComponent<AudioSource>();
 
         gameOverPanel = GameObject.Find("GameOverPanel");
         gameOverPanel.SetActive(false);
@@ -168,6 +172,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (collider.gameObject.tag == "Ammo" && hasGun == true)
         {
+            audioSource.Play();
             heldWeapon.ammo += 4;
             Destroy(collider.gameObject);
         }
