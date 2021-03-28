@@ -22,7 +22,7 @@ public class Chomps : MonoBehaviour
     public int[] PhaseTwoSpawnList;
     public int[] PhaseThreeSpawnList;
 
-    private int health = 1;
+    private int health = 10;
     private int powerLevel = 1;
     private int phase = 1;
     private int powerGrowthRate = 1;
@@ -102,7 +102,7 @@ public class Chomps : MonoBehaviour
             gameObject.transform.Translate(new Vector3(-(gameObject.transform.position.x), 2, -(gameObject.transform.position.z)), Space.World);
             SpawnItems(PhaseTwoSpawnList);
             phase++;
-            health = 1;
+            health = 20;
             powerGrowthRate = 2;
             powerLevelThreshold = 30;
             powerLevel = 1;
@@ -113,7 +113,7 @@ public class Chomps : MonoBehaviour
             gameObject.transform.Translate(new Vector3(-(gameObject.transform.position.x), 2, -(gameObject.transform.position.z)), Space.World);
             SpawnItems(PhaseThreeSpawnList);
             phase++;
-            health = 1;
+            health = 30;
             powerGrowthRate = 3;
             powerLevelThreshold = 30;
             powerLevel = 1;
