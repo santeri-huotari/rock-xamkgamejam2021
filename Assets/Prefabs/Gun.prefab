@@ -154,10 +154,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fffddba542ab484bb3c3f6f09db6183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 5
+  fireRate: 2
   shotAmount: 1
   bulletPrefab: {fileID: 7544722910472713826, guid: c2a9f1b4b39e1df958b6bcfbd5557332, type: 3}
-  startingAmmo: 5
+  startingAmmo: 4
   ammo: 0
   bulletSpeed: 50
 --- !u!54 &670637110

@@ -26,7 +26,7 @@ public class Mine : MonoBehaviour
         if(other.tag == "Player")
         {
             Explode();
-            other.SendMessage("");
+            other.SendMessage("Stun");
         }
         else if(other.tag == "Projectile")
         {
@@ -38,7 +38,7 @@ public class Mine : MonoBehaviour
         meshRenderer.enabled = false;
         mineLight.enabled = false;
         explosionEffect.Play();
-        if (Vector3.Distance(chomps.transform.position, gameObject.transform.position) < 8)
+        if (Vector3.Distance(chomps.transform.position, gameObject.transform.position) < 10)
         {
             chomps.SendMessage("Stun");
         }

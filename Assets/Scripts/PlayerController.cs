@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private GameObject gameOverPanel;
     private Button tryAgainButton;
     private Button mainMenuButton;
+    
 
     [SerializeField]
     private float speed;
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour
     float xRotation = 0;
 
     private bool alive = true;
+    private bool hasGun = false;
 
     // Start is called before the first frame update
     void Start()
@@ -95,12 +97,14 @@ public class PlayerController : MonoBehaviour
 
     void PickUpWeapon(Weapon weapon)
     {
+        hasGun = true;
         heldWeapon = weapon;
         weapon.gameObject.transform.SetParent(gameObject.transform);
         weapon.gameObject.transform.rotation = transform.rotation;
         weapon.gameObject.transform.position = transform.position;
         weapon.gameObject.transform.Translate(Vector3.right * 0.6f);
         weapon.gameObject.transform.Translate(Vector3.up * 0.5f);
+        weapon.gameObject.transform.Translate(Vector3.forward * 0.8f);
     }
 
     void AimWeapon()
@@ -146,6 +150,15 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+    void Stun()
+    {
+        speed = speed / 2;
+        Invoke("Unstun", 3f);
+    }
+    void Unstun()
+    {
+        speed = speed * 2;
+    }
 
     void OnTriggerEnter(Collider collider)
     {
@@ -153,7 +166,7 @@ public class PlayerController : MonoBehaviour
         {
             Die();
         }
-        else if (collider.gameObject.tag == "Ammo")
+        else if (collider.gameObject.tag == "Ammo" && hasGun == true)
         {
             heldWeapon.ammo += 4;
             Destroy(collider.gameObject);

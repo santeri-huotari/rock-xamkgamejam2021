@@ -18,13 +18,12 @@ public class Chomps : MonoBehaviour
     public int[] PhaseTwoSpawnList;
     public int[] PhaseThreeSpawnList;
 
-    public int Health = 10;
-    public int PowerLevel = 1;
-    public int Phase = 1;
-
-    public int PowerGrowthRate = 1;
-    public int PowerLevelThreshold = 30;
-    public float Speed = 0.5f;
+    private int health = 10;
+    private int powerLevel = 1;
+    private int phase = 1;
+    private int powerGrowthRate = 1;
+    private int powerLevelThreshold = 30;
+    private float speedIncrease = 0.5f;
 
     
 
@@ -41,7 +40,7 @@ public class Chomps : MonoBehaviour
     {
         if (other.tag == "Projectile")
         {
-            Health--;
+            health--;
         }
     }
     void Update()
@@ -51,13 +50,13 @@ public class Chomps : MonoBehaviour
     //called every 1.0 seconds
     void Tick()
     {
-        PowerLevel += PowerGrowthRate;
-        if (PowerLevel >= PowerLevelThreshold)
+        powerLevel += powerGrowthRate;
+        if (powerLevel >= powerLevelThreshold)
         {
-            navAgent.speed += Speed;
-            PowerLevelThreshold *= 2;
+            navAgent.speed += speedIncrease;
+            powerLevelThreshold *= 2;
         }
-        if (Health <= 0)
+        if (health <= 0)
         {
             NextPhase();
         }
@@ -79,23 +78,29 @@ public class Chomps : MonoBehaviour
     }
     void NextPhase()
     {
-        if (Phase == 1)
+        if (phase == 1)
         {
-            gameObject.transform.Translate(new Vector3(-(gameObject.transform.position.x),2, -(gameObject.transform.position.x)));
+            gameObject.transform.Translate(new Vector3(-(gameObject.transform.position.x),2, -(gameObject.transform.position.z)),Space.World);
             SpawnItems(PhaseTwoSpawnList);
-            Phase++;
-            Health = 20;
-            PowerGrowthRate = 2;
+            phase++;
+            health = 20;
+            powerGrowthRate = 2;
+            powerLevelThreshold = 30;
+            powerLevel = 1;
+            Stun();
         }
-        else if (Phase == 2)
+        else if (phase == 2)
         {
-            gameObject.transform.Translate(new Vector3(-(gameObject.transform.position.x), 2, -(gameObject.transform.position.x)));
+            gameObject.transform.Translate(new Vector3(-(gameObject.transform.position.x), 2, -(gameObject.transform.position.z)), Space.World);
             SpawnItems(PhaseThreeSpawnList);
-            Phase++;
-            Health = 30;
-            PowerGrowthRate = 3;
+            phase++;
+            health = 30;
+            powerGrowthRate = 3;
+            powerLevelThreshold = 30;
+            powerLevel = 1;
+            Stun();
         }
-        else if (Phase == 3)
+        else if (phase == 3)
         {
             Die();
         }
@@ -113,13 +118,13 @@ public class Chomps : MonoBehaviour
                     switch (i)
                     {
                         case 0:
-                            Instantiate(Ammo, new Vector3(0,0.5f,0)+randomLocation, Quaternion.Euler(-90,0,0));
+                            Instantiate(Ammo, new Vector3(0,0.4f,0)+randomLocation, Quaternion.Euler(-90,0,0));
                             break;
                         case 1:
                             Instantiate(Mines, randomLocation, Quaternion.Euler(-90, 0, 0));
                             break;
                         case 2:
-                            Instantiate(Guns, new Vector3(0, 0.5f, 0) + randomLocation, Quaternion.Euler(0, 0, 0));
+                            Instantiate(Guns, new Vector3(0, 0.5f, 0) + randomLocation, Quaternion.Euler(45, 0, 0));
                             break;
                     }
                 }
@@ -135,7 +140,7 @@ public class Chomps : MonoBehaviour
     {
         if (collision.gameObject.tag == "Projectile")
         {
-            Health--;
+            health--;
         }
     }
 }

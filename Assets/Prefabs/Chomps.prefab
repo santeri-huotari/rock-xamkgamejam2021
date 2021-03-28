@@ -134,15 +134,9 @@ MonoBehaviour:
   Ammo: {fileID: 6008266444996920967, guid: a0b39603d0c2c1f4e8ce5a4b970bb7dd, type: 3}
   Mines: {fileID: 2507265513989264771, guid: d7cd64e967c73cf478773fb0b75a4888, type: 3}
   Guns: {fileID: 2400650236356966460, guid: 813d9a12e341b42b082bff050c453e07, type: 3}
-  PhaseOneSpawnList: 080000000400000001000000
-  PhaseTwoSpawnList: 
-  PhaseThreeSpawnList: 
-  Health: 0
-  PowerLevel: 0
-  Phase: 0
-  PowerGrowthRate: 1
-  PowerLevelThreshold: 60
-  Speed: 1
+  PhaseOneSpawnList: 040000000200000001000000
+  PhaseTwoSpawnList: 060000000400000000000000
+  PhaseThreeSpawnList: 080000000800000000000000
 --- !u!54 &8780637409442145638
 Rigidbody:
   m_ObjectHideFlags: 0
