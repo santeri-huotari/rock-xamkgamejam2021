@@ -8,12 +8,14 @@ public class Mine : MonoBehaviour
     private Light mineLight;
     private ParticleSystem explosionEffect;
     private GameObject chomps;
+    private AudioSource audioSource;
     private void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
         mineLight = GetComponentInChildren<Light>();
         explosionEffect = GetComponent<ParticleSystem>();
         chomps = GameObject.FindGameObjectWithTag("Chomps");
+        audioSource = GetComponent<AudioSource>();
         InvokeRepeating("Tick",1,1);
     }
     //called every second
@@ -35,6 +37,7 @@ public class Mine : MonoBehaviour
     }
     void Explode()
     {
+        audioSource.Play();
         meshRenderer.enabled = false;
         mineLight.enabled = false;
         explosionEffect.Play();
