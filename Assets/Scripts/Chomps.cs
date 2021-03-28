@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Chomps : MonoBehaviour
 {
@@ -18,17 +20,28 @@ public class Chomps : MonoBehaviour
     public int[] PhaseTwoSpawnList;
     public int[] PhaseThreeSpawnList;
 
-    private int health = 10;
+    private int health = 1;
     private int powerLevel = 1;
     private int phase = 1;
     private int powerGrowthRate = 1;
     private int powerLevelThreshold = 30;
     private float speedIncrease = 0.5f;
 
-    
+
+    private Button playAgainButton;
+    private Button mainMenuButton;
+    private GameObject victoryScreenPanel;
 
     void Start()
     {
+        playAgainButton = GameObject.Find("VictoryPlayAgainButton").GetComponent<Button>();
+        mainMenuButton = GameObject.Find("VictoryMainMenuButton").GetComponent<Button>();
+        victoryScreenPanel = GameObject.Find("VictoryPanel");
+
+        playAgainButton.onClick.AddListener(PlayAgain);
+        mainMenuButton.onClick.AddListener(GoToMenu);
+        victoryScreenPanel.SetActive(false);
+
         player = GameObject.FindGameObjectWithTag("Player");
         navAgent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
@@ -80,10 +93,10 @@ public class Chomps : MonoBehaviour
     {
         if (phase == 1)
         {
-            gameObject.transform.Translate(new Vector3(-(gameObject.transform.position.x),2, -(gameObject.transform.position.z)),Space.World);
+            gameObject.transform.Translate(new Vector3(-(gameObject.transform.position.x), 2, -(gameObject.transform.position.z)), Space.World);
             SpawnItems(PhaseTwoSpawnList);
             phase++;
-            health = 20;
+            health = 1;
             powerGrowthRate = 2;
             powerLevelThreshold = 30;
             powerLevel = 1;
@@ -94,7 +107,7 @@ public class Chomps : MonoBehaviour
             gameObject.transform.Translate(new Vector3(-(gameObject.transform.position.x), 2, -(gameObject.transform.position.z)), Space.World);
             SpawnItems(PhaseThreeSpawnList);
             phase++;
-            health = 30;
+            health = 1;
             powerGrowthRate = 3;
             powerLevelThreshold = 30;
             powerLevel = 1;
@@ -103,6 +116,7 @@ public class Chomps : MonoBehaviour
         else if (phase == 3)
         {
             Die();
+            WinGame();
         }
     }
     void SpawnItems(int[] _spawnList)
@@ -118,7 +132,7 @@ public class Chomps : MonoBehaviour
                     switch (i)
                     {
                         case 0:
-                            Instantiate(Ammo, new Vector3(0,0.4f,0)+randomLocation, Quaternion.Euler(-90,0,0));
+                            Instantiate(Ammo, new Vector3(0, 0.4f, 0) + randomLocation, Quaternion.Euler(-90, 0, 0));
                             break;
                         case 1:
                             Instantiate(Mines, randomLocation, Quaternion.Euler(-90, 0, 0));
@@ -133,7 +147,23 @@ public class Chomps : MonoBehaviour
     }
     void Die()
     {
-        Destroy(gameObject);
+        navAgent.isStopped = true;
+    }
+
+    void PlayAgain()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    void GoToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    void WinGame()
+    {
+        victoryScreenPanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
     }
 
     void OnTriggerEnter(Collision collision)
