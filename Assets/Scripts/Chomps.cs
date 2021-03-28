@@ -9,6 +9,7 @@ public class Chomps : MonoBehaviour
     private NavMeshAgent navAgent;
     private NavMeshHit navhit;
     private Vector3 randomLocation;
+    private Animator anim;
 
     public GameObject Ammo;
     public int Health;
@@ -56,11 +57,17 @@ public class Chomps : MonoBehaviour
     }
     void Stun()
     {
-        navAgent.isStopped = true;
+        Invoke("Stop", 0f);
         Invoke("Resume", 5f);
+    }
+    void Stop()
+    {
+        anim.SetTrigger("Stop");
+        navAgent.isStopped = true;
     }
     void Resume()
     {
+        anim.SetTrigger("Resume");
         navAgent.isStopped = false;
     }
     void NextPhase()
