@@ -12,6 +12,8 @@ public class Chomps : MonoBehaviour
     private NavMeshHit navhit;
     private Vector3 randomLocation;
     private Animator anim;
+    private AudioSource audioSource;
+
 
     public GameObject Ammo;
     public GameObject Mines;
@@ -45,6 +47,8 @@ public class Chomps : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         navAgent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+
 
         SpawnItems(PhaseOneSpawnList);
         InvokeRepeating("Tick", 0, 1f);
@@ -83,11 +87,13 @@ public class Chomps : MonoBehaviour
     {
         anim.SetTrigger("Stop");
         navAgent.isStopped = true;
+        audioSource.mute = true;
     }
     void Resume()
     {
         anim.SetTrigger("Resume");
         navAgent.isStopped = false;
+        audioSource.mute = false;
     }
     void NextPhase()
     {
