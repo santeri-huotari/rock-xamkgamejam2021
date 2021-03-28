@@ -106,7 +106,7 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 1.1
+    agentRadius: 0.9
     agentHeight: 2
     agentSlope: 45
     agentClimb: 0.75
@@ -114,7 +114,7 @@ NavMeshSettings:
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.36666667
+    cellSize: 0.29999998
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -7738,7 +7738,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 0.9601507, g: 0, b: 1, a: 1}
   m_Intensity: 1
-  m_Range: 200
+  m_Range: 300
   m_SpotAngle: 159.5
   m_InnerSpotAngle: 1
   m_CookieSize: 10
@@ -7782,7 +7782,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.05e-43, y: 1e-45, z: 3.0913e-41, w: -0.00000006966201}
+  m_BoundingSphereOverride: {x: 6.2e-44, y: 6.569e-42, z: 1.02e-43, w: 0.22043693}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -7795,7 +7795,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1654243470}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 46.6, z: 131.6}
+  m_LocalPosition: {x: 0, y: 46.6, z: 108.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8756,7 +8756,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 0.9601507, g: 0, b: 1, a: 1}
   m_Intensity: 1
-  m_Range: 200
+  m_Range: 300
   m_SpotAngle: 159.5
   m_InnerSpotAngle: 1
   m_CookieSize: 10
@@ -10626,7 +10626,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 0.9601507, g: 0, b: 1, a: 1}
   m_Intensity: 1
-  m_Range: 200
+  m_Range: 300
   m_SpotAngle: 159.5
   m_InnerSpotAngle: 1
   m_CookieSize: 10
@@ -10670,7 +10670,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.05e-43, y: 4.0058793e-11, z: 6.7e-44, w: -0.000000070628914}
+  m_BoundingSphereOverride: {x: 0, y: -3.8503045e-19, z: 4.5754e-41, w: 8.3e-44}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -10683,7 +10683,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2075435965}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 46.6, z: -142.2}
+  m_LocalPosition: {x: 0, y: 46.6, z: -119.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
