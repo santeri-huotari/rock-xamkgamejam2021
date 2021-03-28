@@ -18,12 +18,14 @@ public class Weapon : MonoBehaviour
     private int bulletSpeed;
     private bool canShoot = true;
     float cooldown;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         ammo = startingAmmo;
         cooldown = fireRate;
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void Fire()
@@ -32,6 +34,8 @@ public class Weapon : MonoBehaviour
         {
             var spawnedBullet = Instantiate(bulletPrefab, gameObject.GetComponentInChildren<BulletSpawnPoint>().transform.position, transform.rotation);
             spawnedBullet.GetComponent<Rigidbody>().AddForce(transform.forward * bulletSpeed, ForceMode.Impulse);
+
+            audioSource.Play();
 
             ammo--;
             canShoot = false;
