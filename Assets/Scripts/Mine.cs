@@ -38,7 +38,7 @@ public class Mine : MonoBehaviour
         meshRenderer.enabled = false;
         mineLight.enabled = false;
         explosionEffect.Play();
-        if (Vector3.Distance(gameObject.transform.position, chomps.transform.position) < 4)
+        if (Vector3.Distance(chomps.transform.position, gameObject.transform.position) < 8)
         {
             chomps.SendMessage("Stun");
         }

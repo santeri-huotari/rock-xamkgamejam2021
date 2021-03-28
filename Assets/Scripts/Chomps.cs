@@ -12,26 +12,30 @@ public class Chomps : MonoBehaviour
     private Animator anim;
 
     public GameObject Ammo;
-    public int Health;
-    public int PowerLevel;
-    public bool Stunned;
-    public int AmmoSpawnCount;
-    public int Phase;
+    public GameObject Mines;
+    public GameObject Guns;
+    public int[] PhaseOneSpawnList;
+    public int[] PhaseTwoSpawnList;
+    public int[] PhaseThreeSpawnList;
 
-    public int PowerGrowthRate;
-    public int PowerLevelThreshold;
-    public float Speed;
+    public int Health = 10;
+    public int PowerLevel = 1;
+    public int Phase = 1;
+
+    public int PowerGrowthRate = 1;
+    public int PowerLevelThreshold = 30;
+    public float Speed = 0.5f;
+
+    
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        navAgent = gameObject.GetComponent<NavMeshAgent>();
+        navAgent = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
 
-        Health = 3;
-        PowerLevel = 1;
-        Phase = 1;
-
-        SpawnItems();
-        InvokeRepeating("Tick", 0, 0.5f);
+        SpawnItems(PhaseOneSpawnList);
+        InvokeRepeating("Tick", 0, 1f);
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -40,10 +44,13 @@ public class Chomps : MonoBehaviour
             Health--;
         }
     }
-    //called every 0.5 seconds
-    void Tick()
+    void Update()
     {
         navAgent.SetDestination(player.transform.position);
+    }
+    //called every 1.0 seconds
+    void Tick()
+    {
         PowerLevel += PowerGrowthRate;
         if (PowerLevel >= PowerLevelThreshold)
         {
@@ -52,7 +59,7 @@ public class Chomps : MonoBehaviour
         }
         if (Health <= 0)
         {
-            Die();
+            NextPhase();
         }
     }
     void Stun()
@@ -72,24 +79,56 @@ public class Chomps : MonoBehaviour
     }
     void NextPhase()
     {
-        //increase power growth rate 
-    }
-    void SpawnItems()
-    {
-        while (AmmoSpawnCount > 0)
+        if (Phase == 1)
         {
-            randomLocation = new Vector3(Random.Range(-100, 100), 0, Random.Range(-100, 100));
-            if (NavMesh.SamplePosition(randomLocation, out navhit, 0.5f, 1) == true)
+            gameObject.transform.Translate(new Vector3(-(gameObject.transform.position.x),2, -(gameObject.transform.position.x)));
+            SpawnItems(PhaseTwoSpawnList);
+            Phase++;
+            Health = 20;
+            PowerGrowthRate = 2;
+        }
+        else if (Phase == 2)
+        {
+            gameObject.transform.Translate(new Vector3(-(gameObject.transform.position.x), 2, -(gameObject.transform.position.x)));
+            SpawnItems(PhaseThreeSpawnList);
+            Phase++;
+            Health = 30;
+            PowerGrowthRate = 3;
+        }
+        else if (Phase == 3)
+        {
+            Die();
+        }
+    }
+    void SpawnItems(int[] _spawnList)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            while (_spawnList[i] > 0)
             {
-                Instantiate(Ammo, randomLocation, transform.rotation);
-                AmmoSpawnCount--;
+                randomLocation = new Vector3(Random.Range(-100, 100), 0, Random.Range(-100, 100));
+                if (NavMesh.SamplePosition(randomLocation, out navhit, 0.5f, 1) == true)
+                {
+                    _spawnList[i]--;
+                    switch (i)
+                    {
+                        case 0:
+                            Instantiate(Ammo, new Vector3(0,0.5f,0)+randomLocation, Quaternion.Euler(-90,0,0));
+                            break;
+                        case 1:
+                            Instantiate(Mines, randomLocation, Quaternion.Euler(-90, 0, 0));
+                            break;
+                        case 2:
+                            Instantiate(Guns, new Vector3(0, 0.5f, 0) + randomLocation, Quaternion.Euler(0, 0, 0));
+                            break;
+                    }
+                }
             }
         }
     }
     void Die()
     {
         Destroy(gameObject);
-        //teleport
     }
 
     void OnTriggerEnter(Collision collision)

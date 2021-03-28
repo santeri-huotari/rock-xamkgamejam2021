@@ -131,11 +131,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba5a6919e5a7d7d4db74f6904fd50da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ammo: {fileID: 3246764019278098420, guid: f8d344a5cac279847b7bad6f2d031972, type: 3}
+  Ammo: {fileID: 6008266444996920967, guid: a0b39603d0c2c1f4e8ce5a4b970bb7dd, type: 3}
+  Mines: {fileID: 2507265513989264771, guid: d7cd64e967c73cf478773fb0b75a4888, type: 3}
+  Guns: {fileID: 2400650236356966460, guid: 813d9a12e341b42b082bff050c453e07, type: 3}
+  PhaseOneSpawnList: 080000000400000001000000
+  PhaseTwoSpawnList: 
+  PhaseThreeSpawnList: 
   Health: 0
   PowerLevel: 0
-  Stunned: 0
-  AmmoSpawnCount: 5
   Phase: 0
   PowerGrowthRate: 1
   PowerLevelThreshold: 60
